@@ -158,7 +158,7 @@ public class PlayerActivity extends Activity {
 
     private CoordinatorLayout coordinatorLayout;
     private TextView titleView;
-    private ImageButton buttonOpen;
+//    private ImageButton buttonOpen;
     private ImageButton buttonPiP;
     private ImageButton buttonAspectRatio;
     private ImageButton buttonRotation;
@@ -382,22 +382,6 @@ public class PlayerActivity extends Activity {
             }
         });
 
-        buttonOpen = new ImageButton(this, null, 0, R.style.ExoStyledControls_Button_Bottom);
-        buttonOpen.setImageResource(R.drawable.ic_folder_open_24dp);
-        buttonOpen.setId(View.generateViewId());
-        buttonOpen.setContentDescription(getString(R.string.button_open));
-
-        buttonOpen.setOnClickListener(view -> openFile(mPrefs.mediaUri));
-
-        buttonOpen.setOnLongClickListener(view -> {
-            if (!isTvBox && mPrefs.askScope) {
-                askForScope(true, false);
-            } else {
-                loadSubtitleFile(mPrefs.mediaUri);
-            }
-            return true;
-        });
-
         if (Utils.isPiPSupported(this)) {
             // TODO: Android 12 improvements:
             // https://developer.android.com/about/versions/12/features/pip-improvements
@@ -597,7 +581,6 @@ public class PlayerActivity extends Activity {
         final HorizontalScrollView horizontalScrollView = (HorizontalScrollView) getLayoutInflater().inflate(R.layout.controls, null);
         final LinearLayout controls = horizontalScrollView.findViewById(R.id.controls);
 
-        controls.addView(buttonOpen);
         controls.addView(exoSubtitle);
         controls.addView(buttonAspectRatio);
         if (Utils.isPiPSupported(this) && buttonPiP != null) {
@@ -639,7 +622,7 @@ public class PlayerActivity extends Activity {
                     findViewById(R.id.exo_play_pause).requestFocus();
                 }
 
-                if (controllerVisible && playerView.isControllerFullyVisible()) {
+                /*if (controllerVisible && playerView.isControllerFullyVisible()) {
                     if (mPrefs.firstRun) {
                         TapTargetView.showFor(PlayerActivity.this,
                                 TapTarget.forView(buttonOpen, getString(R.string.onboarding_open_title), getString(R.string.onboarding_open_description))
@@ -664,7 +647,7 @@ public class PlayerActivity extends Activity {
                         showError(errorToShow);
                         errorToShow = null;
                     }
-                }
+                }*/
             }
         });
 

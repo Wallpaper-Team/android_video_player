@@ -1,2 +1,8 @@
 include ':app', ':doubletapplayerview', 'android-file-chooser'
 rootProject.name = "Player"
+include ':app:common'
+include ':app:ui'
+include ':app:extractor'
+include ':app:core'
+include ':app:av1'
+include ':app:ffmpeg'

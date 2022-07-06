@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
 }
 
 android {
@@ -8,7 +8,7 @@ android {
     ndkVersion '21.4.7075529'
 
     defaultConfig {
-        applicationId "com.brouken.player"
+        //applicationId "com.brouken.player"
         minSdkVersion 21
         targetSdkVersion 33
         versionCode 121
@@ -29,7 +29,7 @@ android {
         }
         legacy {
             dimension "targetSdk"
-            applicationIdSuffix ".legacy"
+            //applicationIdSuffix ".legacy"
             versionNameSuffix "-legacy"
             targetSdkVersion 29
         }
@@ -49,7 +49,7 @@ android {
     }
     androidComponents {
         onVariants(selector().withFlavor(new kotlin.Pair("distribution", "amazon")), {
-            packaging.dex.useLegacyPackaging.set(false)
+            //packaging.dex.useLegacyPackaging.set(false)
             packaging.jniLibs.excludes.add('lib/armeabi-v7a/*_neon.so')
         })
     }
@@ -88,7 +88,7 @@ dependencies {
     implementation("com.google.android.exoplayer:exoplayer-rtsp:$exoplayerVersion") {
         exclude group: "com.google.android.exoplayer", module: "exoplayer-core"
     }
-    api ('com.google.guava:guava:31.0.1-android') {
+    api('com.google.guava:guava:31.0.1-android') {
         exclude group: 'com.google.code.findbugs', module: 'jsr305'
         exclude group: 'org.checkerframework', module: 'checker-compat-qual'
         exclude group: 'org.checkerframework', module: 'checker-qual'
@@ -105,7 +105,10 @@ dependencies {
     implementation 'androidx.preference:preference:1.2.0'
     implementation 'com.squareup.okhttp3:okhttp:4.10.0'
     implementation project(path: ':doubletapplayerview')
-    implementation project(path: ':android-file-chooser')
-    implementation fileTree(dir: "libs", include: ["extension-*.aar"])
-    implementation fileTree(dir: "libs", include: ["library-*.aar"])
+    api project(':app:ui')
+    api project(':app:common')
+    api project(':app:core')
+    api project(':app:extractor')
+    api project(':app:av1')
+    api project(':app:ffmpeg')
 }

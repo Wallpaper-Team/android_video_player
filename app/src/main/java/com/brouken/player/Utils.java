@@ -49,7 +49,6 @@ import com.arthenica.ffmpegkit.StreamInformation;
 import com.google.android.exoplayer2.Format;
 import com.google.android.exoplayer2.ui.StyledPlayerControlView;
 import com.google.android.exoplayer2.util.MimeTypes;
-import com.obsez.android.lib.filechooser.ChooserDialog;
 
 import java.io.File;
 import java.io.InputStream;
@@ -609,7 +608,7 @@ class Utils {
 
         final String[] suffixes = (video ? supportedExtensionsVideo : supportedExtensionsSubtitle);
 
-        ChooserDialog chooserDialog = new ChooserDialog(activity, R.style.FileChooserStyle_Dark)
+        /*ChooserDialog chooserDialog = new ChooserDialog(activity, R.style.FileChooserStyle_Dark)
                 .withStartFile(startPath)
                 .withFilter(false, false, suffixes)
                 .withChosenListener(new ChooserDialog.Result() {
@@ -641,7 +640,7 @@ class Utils {
         chooserDialog
                 .withOnBackPressedListener(dialog -> chooserDialog.goBack())
                 .withOnLastBackPressedListener(dialog -> dialog.cancel());
-        chooserDialog.build().show();
+        chooserDialog.build().show();*/
 
         return true;
     }
