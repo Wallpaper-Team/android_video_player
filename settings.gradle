@@ -1,2 +1,2 @@
-include ':app', ':doubletapplayerview', 'android-file-chooser'
+include ':app', ':doubletapplayerview'
 rootProject.name = "Player"

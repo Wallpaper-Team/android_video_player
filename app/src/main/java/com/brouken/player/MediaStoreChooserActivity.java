@@ -148,7 +148,7 @@ public class MediaStoreChooserActivity extends Activity {
             alertDialogBuilder.setMessage(R.string.mediastore_empty);
         } else {
             alertDialogBuilder = new AlertDialog.Builder(this, R.style.MediaStoreChooserDialog);
-            alertDialogBuilder.setTitle(getString(R.string.choose_file));
+            //alertDialogBuilder.setTitle(getString(R.string.choose_file));
             alertDialogBuilder.setItems(bucketDisplayNames, (dialogInterface, i) -> {
                 Intent intent = new Intent(MediaStoreChooserActivity.this, MediaStoreChooserActivity.class);
                 intent.putExtra(SUBTITLES, subtitles);

@@ -49,7 +49,6 @@ import com.arthenica.ffmpegkit.StreamInformation;
 import com.google.android.exoplayer2.Format;
 import com.google.android.exoplayer2.ui.StyledPlayerControlView;
 import com.google.android.exoplayer2.util.MimeTypes;
-import com.obsez.android.lib.filechooser.ChooserDialog;
 
 import java.io.File;
 import java.io.InputStream;
@@ -597,53 +596,6 @@ class Utils {
             if (activity.playerView != null)
                 activity.playerView.hideController();
         }
-    }
-
-    public static boolean alternativeChooser(PlayerActivity activity, Uri initialUri, boolean video) {
-        String startPath;
-        if (initialUri != null && (new File(initialUri.getSchemeSpecificPart())).exists()) {
-            startPath = initialUri.getSchemeSpecificPart();
-        } else {
-            startPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES).getAbsolutePath();
-        }
-
-        final String[] suffixes = (video ? supportedExtensionsVideo : supportedExtensionsSubtitle);
-
-        ChooserDialog chooserDialog = new ChooserDialog(activity, R.style.FileChooserStyle_Dark)
-                .withStartFile(startPath)
-                .withFilter(false, false, suffixes)
-                .withChosenListener(new ChooserDialog.Result() {
-                    @Override
-                    public void onChoosePath(String path, File pathFile) {
-                        activity.releasePlayer();
-                        Uri uri = DocumentFile.fromFile(pathFile).getUri();
-                        if (video) {
-                            activity.mPrefs.setPersistent(true);
-                            activity.mPrefs.updateMedia(activity, uri, null);
-                            activity.searchSubtitles();
-                        } else {
-                            // Convert subtitles to UTF-8 if necessary
-                            SubtitleUtils.clearCache(activity);
-                            uri = SubtitleUtils.convertToUTF(activity, uri);
-
-                            activity.mPrefs.updateSubtitle(uri);
-                        }
-                        PlayerActivity.focusPlay = true;
-                        activity.initializePlayer();
-                    }
-                })
-                // to handle the back key pressed or clicked outside the dialog:
-                .withOnCancelListener(new DialogInterface.OnCancelListener() {
-                    public void onCancel(DialogInterface dialog) {
-                        dialog.cancel(); // MUST have
-                    }
-                });
-        chooserDialog
-                .withOnBackPressedListener(dialog -> chooserDialog.goBack())
-                .withOnLastBackPressedListener(dialog -> dialog.cancel());
-        chooserDialog.build().show();
-
-        return true;
     }
 
     public static boolean isPiPSupported(Context context) {
